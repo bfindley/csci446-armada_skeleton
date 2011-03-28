@@ -11,9 +11,9 @@ Role.create!(:name => 'member', :description => 'A typical application user.')
 r = Role.find_by_name('developer')
 
 # FIXME
-team_member_1 = User.new(:first_name => 'YOUR_FIRST_NAME',
-                         :last_name => 'YOUR_LAST_NAME',
-                         :email => 'PARTNER1@mines.edu',
+team_member_1 = User.new(:first_name => 'Dan',
+                         :last_name => 'Baumann',
+                         :email => 'dbaumann@mines.edu',
                          :password => 'changeme',
                          :password_confirmation => 'changeme',
                          :role => r)
