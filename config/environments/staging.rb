@@ -8,7 +8,7 @@ config.log_level = :debug
 # config.action_controller.asset_host = "http://assets.example.com"
 # config.threadsafe!
 
-config.action_mailer.default_url_options = { :host => "deep-sky-83.heroku.com/" }
+config.action_mailer.default_url_options = { :host => "deep-sky-83.heroku.com" }
 
 # HTTP Basic Auth for staging (using Rack middleware)
 config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "Staging") do |u, p|
