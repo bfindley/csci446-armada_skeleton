@@ -2,13 +2,25 @@ class Role < ActiveRecord::Base
   
   has_paper_trail
   
-  validates_length_of :name, :minimum => 1
   validates_uniqueness_of :name
+  validates_presence_of :name
+  validates_length_of :name, :minimum => 1
 
   has_many :users
 
-end
+  def initialize(params=nil)
+    super(params)
+    # Makes name lowercase and removes unnecessary whitespace
+    if(!self.name.nil?)
+      self.name = self.name.strip.downcase
+    end
+  end
 
+  def to_s
+    self.name
+  end
+  
+end
 
 
 # == Schema Information
