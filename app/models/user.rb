@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   default_scope :include => :role
 
   before_create :assign_default_role
+  
+  validate_on_update :role_must_be_assigned
 
   def role_symbols
     [role.name.downcase.to_sym]
@@ -26,11 +28,24 @@ class User < ActiveRecord::Base
   def is_admin?
     role_symbols.include?(:administrator) || role_symbols.include?(:developer)
   end
+  
+  def full_name
+    "#{@first_name} #{@last_name}"
+  end
+  
+  def to_s
+    full_name
+  end
 
   private
 
     def assign_default_role
       self.role = Role.find_by_name('member') if role_id.blank?
+    end
+    
+    def role_must_be_assigned
+      #validates_associated doesn't seem to work for this
+      errors.add(:role_id, "must point to an existing role") if role.nil?
     end
 
 end
