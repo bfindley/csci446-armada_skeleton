@@ -1,0 +1,40 @@
+%h1 Editing fighter
+- form_for(@fighter) do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br/
+    = f.text_field :name
+  %p
+    = f.label :fighter_type
+    %br/
+    = f.text_field :fighter_type
+  %p
+    = f.label :primary_weapon
+    %br/
+    = f.text_field :primary_weapon
+  %p
+    = f.label :secondary_weapon
+    %br/
+    = f.text_field :secondary_weapon
+  %p
+    = f.label :pilot_name
+    %br/
+    = f.text_field :pilot_name
+  %p
+    = f.label :description
+    %br/
+    = f.text_area :description
+  %p
+    = f.label :cost
+    %br/
+    = f.text_field :cost
+  %p
+    = f.label :user_id
+    %br/
+    = f.text_field :user_id
+  %p
+    = f.submit 'Update'
+= link_to 'Show', @fighter
+|
+\#{link_to 'Back', fighters_path}

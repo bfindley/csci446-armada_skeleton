@@ -1,0 +1,26 @@
+%h1 Listing fighters
+%table
+  %tr
+    %th Name
+    %th Fighter type
+    %th Primary weapon
+    %th Secondary weapon
+    %th Pilot name
+    %th Description
+    %th Cost
+    %th User
+  - @fighters.each do |fighter|
+    %tr
+      %td= h fighter.name
+      %td= h fighter.fighter_type
+      %td= h fighter.primary_weapon
+      %td= h fighter.secondary_weapon
+      %td= h fighter.pilot_name
+      %td= h fighter.description
+      %td= h fighter.cost
+      %td= h fighter.user_id
+      %td= link_to 'Show', fighter
+      %td= link_to 'Edit', edit_fighter_path(fighter)
+      %td= link_to 'Destroy', fighter, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New fighter', new_fighter_path

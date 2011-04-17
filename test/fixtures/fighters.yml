@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  fighter_type: MyString
+  primary_weapon: MyString
+  secondary_weapon: MyString
+  pilot_name: MyString
+  description: MyText
+  cost: 
+  user_id: 
+
+two:
+  name: MyString
+  fighter_type: MyString
+  primary_weapon: MyString
+  secondary_weapon: MyString
+  pilot_name: MyString
+  description: MyText
+  cost: 
+  user_id: 
