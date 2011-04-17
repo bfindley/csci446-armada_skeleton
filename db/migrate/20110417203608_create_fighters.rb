@@ -7,8 +7,8 @@ class CreateFighters < ActiveRecord::Migration
       t.string :secondary_weapon
       t.string :pilot_name
       t.text :description
-      t.int :cost
-      t.int :user_id
+      t.integer :cost
+      t.integer :user_id
 
       t.timestamps
     end
