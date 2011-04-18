@@ -23,8 +23,10 @@
   %p
     = f.label :cost
     = f.text_field :cost
+ 
   %p
-    = f.submit 'Update'
+    = f.submit 'Move Zig'
+
 = link_to 'Show', @fighter
 |
-\#{link_to 'Back', admin_fighters_path}
+\#{link_to 'Back', members_fighters_path}

@@ -2,7 +2,7 @@ class Members::FightersController < Members::MembersController
 
   before_filter :get_users, :only => [:new, :create, :edit, :update]
 
-  FIGHTERS_PER_PAGE = 20
+  FIGHTERS_PER_PAGE = 10
   
   def index
     @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
@@ -31,10 +31,6 @@ class Members::FightersController < Members::MembersController
     end
   end
 
-  def edit
-    @fighter = Fighter.find(params[:id])
-  end
-
   def create
     @fighter = Fighter.new(params[:fighter])
 
@@ -49,12 +45,20 @@ class Members::FightersController < Members::MembersController
       end
     end
   end
+  
+  def edit
+    @fighter = Fighter.find(params[:id])
+  end
 
   def update
     @fighter = Fighter.find(params[:id])
 
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
+<<<<<<< HEAD
+=======
+        flash[:success] = "#{@fighter.name} was successfully updated."
+>>>>>>> ba2f1137271773ccc198da0aab60cb567b68dc1e
         format.html { redirect_to members_fighters_url }
         format.xml  { head :ok }
       else
