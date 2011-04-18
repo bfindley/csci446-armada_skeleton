@@ -1,33 +1,4 @@
 - content_for :title do
   Edit Fighter
-- form_for(@fighter) do |f|
-  = f.error_messages
-  %p
-    = f.label :name
-    = f.text_field :name
-  %p
-    = f.label :fighter_type
-    = f.text_field :fighter_type
-  %p
-    = f.label :primary_weapon
-    = f.text_field :primary_weapon
-  %p
-    = f.label :secondary_weapon
-    = f.text_field :secondary_weapon
-  %p
-    = f.label :pilot_name
-    = f.text_field :pilot_name
-  %p
-    = f.label :description
-    = f.text_area :description
-  %p
-    = f.label :cost
-    = f.text_field :cost
-  %p
-    = f.label :user_id
-    = f.text_field :user_id    
-  %p
-    = f.submit 'Update'
-= link_to 'Show', @fighter
-|
-\#{link_to 'Back', fighters_path}
+
+= render :partial => "form", :locals => {:fighters => @figthers}

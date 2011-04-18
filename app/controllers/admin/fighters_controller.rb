@@ -1,50 +1,46 @@
 class Admin::FightersController < Admin::AdminController
-  # GET /fighters
-  # GET /fighters.xml
+  
+  
+  FIGHTERS_PER_PAGE = 20
+  
   def index
-    @fighters = Fighter.all
+    @fighters = Fighter.paginate(:page => params[:page], :per_page => FIGHTERS_PER_PAGE)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.xml  { render :xml => @fighters }
     end
   end
 
-  # GET /fighters/1
-  # GET /fighters/1.xml
   def show
     @fighter = Fighter.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.xml  { render :xml => @fighter }
     end
   end
 
-  # GET /fighters/new
-  # GET /fighters/new.xml
   def new
     @fighter = Fighter.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.xml  { render :xml => @fighter }
     end
   end
 
-  # GET /fighters/1/edit
   def edit
     @fighter = Fighter.find(params[:id])
   end
 
-  # POST /fighters
-  # POST /fighters.xml
   def create
     @fighter = Fighter.new(params[:fighter])
 
     respond_to do |format|
       if @fighter.save
-        format.html { redirect_to(@fighter, :notice => 'Fighter was successfully created.') }
+        flash[:success] = '#{@fighter.name} was successfully created.'
+        format.html { redirect_to_admin_fighters_url(@fighter) }
         format.xml  { render :xml => @fighter, :status => :created, :location => @fighter }
       else
         format.html { render :action => "new" }
@@ -53,14 +49,12 @@ class Admin::FightersController < Admin::AdminController
     end
   end
 
-  # PUT /fighters/1
-  # PUT /fighters/1.xml
   def update
     @fighter = Fighter.find(params[:id])
 
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
-        format.html { redirect_to(@fighter, :notice => 'Fighter was successfully updated.') }
+        format.html { redirect_to_admin_fighters_url(@fighter) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -69,14 +63,12 @@ class Admin::FightersController < Admin::AdminController
     end
   end
 
-  # DELETE /fighters/1
-  # DELETE /fighters/1.xml
   def destroy
     @fighter = Fighter.find(params[:id])
     @fighter.destroy
 
     respond_to do |format|
-      format.html { redirect_to(fighters_url) }
+      format.html { redirect_to_admin_fighters_url(@fighter) }
       format.xml  { head :ok }
     end
   end
