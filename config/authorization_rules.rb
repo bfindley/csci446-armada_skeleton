@@ -8,6 +8,7 @@ authorization do
     has_permission_on :admin_admin, :to => :read
     has_permission_on :admin_users, :to => :manage
     has_permission_on :admin_roles, :to => :manage
+    has_permission_on :admin_fighters, :to => :manage
   end
   role :developer do
     includes :administrator
