@@ -40,7 +40,7 @@ class Admin::FightersController < Admin::AdminController
     respond_to do |format|
       if @fighter.save
         flash[:success] = '#{@fighter.name} was successfully created.'
-        format.html { redirect_to_admin_fighters_url(@fighter) }
+        format.html { redirect_to admin_fighters_url }
         format.xml  { render :xml => @fighter, :status => :created, :location => @fighter }
       else
         format.html { render :action => "new" }
@@ -54,7 +54,7 @@ class Admin::FightersController < Admin::AdminController
 
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
-        format.html { redirect_to_admin_fighters_url(@fighter) }
+        format.html { redirect_to admin_fighters_url }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -68,7 +68,7 @@ class Admin::FightersController < Admin::AdminController
     @fighter.destroy
 
     respond_to do |format|
-      format.html { redirect_to_admin_fighters_url(@fighter) }
+      format.html { redirect_to admin_fighters_url }
       format.xml  { head :ok }
     end
   end
