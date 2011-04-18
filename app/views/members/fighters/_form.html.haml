@@ -25,7 +25,7 @@
     = f.text_field :cost
   %p
     = f.label :user_id
-    = f.select :user_id, @users.collect { |user| [user.to_s, user.id]}   
+    = f.select :user_id, @users.collect { |user| [user.to_s, user.id]}     
   %p
     = f.submit 'Update'
 = link_to 'Show', @fighter

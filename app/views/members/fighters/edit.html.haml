@@ -1,0 +1,8 @@
+- content_for :title do
+  = "Editing #{@fighter.name}"
+%h2
+  = "Editing #{@fighter.name}"
+%p
+  = "created by #{@fighter.user} on #{@fighter.date}"
+  
+= render :partial => "form", :locals => {:fighter => @fighter}

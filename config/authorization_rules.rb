@@ -1,7 +1,11 @@
 # Using declarative_authorization.
 authorization do
+  role :guest do
+    has_permission_on :fighters, :to => [:index, :show]
+  end
   role :member do
     has_permission_on :members_members, :to => :read
+    has_permission_on :members_fighters, :to => :manage
   end
   role :administrator do
     includes :member
