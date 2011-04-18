@@ -1,0 +1,12 @@
+- content_for :title do
+  All Fighters
+%table
+  - @fighters.each do |fighter|
+    %tr
+      %td
+        = link_to fighter.name, fighter
+        =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"
+        %br/
+        =h fighter.description
+%br/
+= link_to 'New fighter', new_fighter_path

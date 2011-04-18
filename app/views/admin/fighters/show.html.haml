@@ -1,0 +1,27 @@
+%p
+  %b Name:
+  = h @fighter.name
+%p
+  %b Fighter type:
+  = h @fighter.fighter_type
+%p
+  %b Primary weapon:
+  = h @fighter.primary_weapon
+%p
+  %b Secondary weapon:
+  = h @fighter.secondary_weapon
+%p
+  %b Pilot name:
+  = h @fighter.pilot_name
+%p
+  %b Description:
+  = h @fighter.description
+%p
+  %b Cost:
+  = h @fighter.cost
+%p
+  %b User:
+  = h @fighter.user_id
+= link_to 'Edit', edit_fighter_path(@fighter)
+|
+\#{link_to 'Back', fighters_path}
