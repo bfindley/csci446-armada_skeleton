@@ -1,4 +1,6 @@
 %p
+  = image_tag("placeholder.jpg")
+%p
   %b Name:
   = h @fighter.name
 %p
@@ -22,6 +24,6 @@
 %p
   %b User:
   = h @fighter.user_id
-= link_to 'Edit', edit_fighter_path(@fighter)
+= link_to 'Edit', edit_admin_fighter_path(@fighter)
 |
 \#{link_to 'Back', fighters_path}

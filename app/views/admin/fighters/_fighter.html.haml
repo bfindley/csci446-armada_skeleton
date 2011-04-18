@@ -1,5 +1,7 @@
 %tr
   %td
+    = image_tag("small_placeholder.jpg")
+  %td
     = link_to fighter.name, admin_fighter_path(fighter)
     =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"
     %br/

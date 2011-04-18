@@ -1,6 +1,9 @@
 - form_for [:admin, @fighter] do |f|
   = f.error_messages
   %p
+    = image_tag("placeholder.jpg")
+  
+  %p
     = f.label :name
     = f.text_field :name
   %p

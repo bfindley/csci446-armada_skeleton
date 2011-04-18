@@ -4,7 +4,7 @@ class Admin::FightersController < Admin::AdminController
   FIGHTERS_PER_PAGE = 20
   
   def index
-    @fighters = Fighter.paginate(:page => params[:page], :per_page => FIGHTERS_PER_PAGE)
+    @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
 
     respond_to do |format|
       format.html 
