@@ -55,10 +55,8 @@ class Members::FightersController < Members::MembersController
 
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
-<<<<<<< HEAD
-=======
+
         flash[:success] = "#{@fighter.name} was successfully updated."
->>>>>>> ba2f1137271773ccc198da0aab60cb567b68dc1e
         format.html { redirect_to members_fighters_url }
         format.xml  { head :ok }
       else
