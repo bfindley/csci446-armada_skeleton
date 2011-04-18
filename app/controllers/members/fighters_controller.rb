@@ -1,5 +1,7 @@
 class Members::FightersController < Members::MembersController
 
+  before_filter :get_users, :only => [:new, :create, :edit, :update]
+
   FIGHTERS_PER_PAGE = 20
   
   def index
@@ -71,4 +73,10 @@ class Members::FightersController < Members::MembersController
       format.xml  { head :ok }
     end
   end
+  
+  private
+    
+    def get_users
+      @users = User.all
+    end
 end

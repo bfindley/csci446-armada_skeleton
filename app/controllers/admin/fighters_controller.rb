@@ -2,6 +2,8 @@ class Admin::FightersController < Admin::AdminController
 
   FIGHTERS_PER_PAGE = 20
   
+  before_filter :get_users, :only => [:new, :create, :edit, :update]
+  
   def index
     @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
 
@@ -71,4 +73,10 @@ class Admin::FightersController < Admin::AdminController
       format.xml  { head :ok }
     end
   end
+  
+  private
+    
+    def get_users
+      @users = User.all
+    end
 end
