@@ -40,8 +40,8 @@ class Members::FightersController < Members::MembersController
 
     respond_to do |format|
       if @fighter.save
-        flash[:success] = '#{@fighter.name} was successfully created.'
-        format.html { redirect_to admin_fighters_url }
+        flash[:success] = "#{@fighter.name} was successfully created."
+        format.html { redirect_to members_fighters_url }
         format.xml  { render :xml => @fighter, :status => :created, :location => @fighter }
       else
         format.html { render :action => "new" }
@@ -55,7 +55,7 @@ class Members::FightersController < Members::MembersController
 
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
-        format.html { redirect_to admin_fighters_url }
+        format.html { redirect_to members_fighters_url }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -69,7 +69,7 @@ class Members::FightersController < Members::MembersController
     @fighter.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_fighters_url }
+      format.html { redirect_to members_fighters_url }
       format.xml  { head :ok }
     end
   end
