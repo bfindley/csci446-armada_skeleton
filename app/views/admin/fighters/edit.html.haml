@@ -1,4 +1,8 @@
 - content_for :title do
-  Edit Fighter
-
-= render :partial => "form", :locals => {:fighters => @figthers}
+  = "Editing #{@fighter.name}"
+%h2
+  = "Editing #{@fighter.name}"
+%p
+  = "created by #{@fighter.user} on #{@fighter.date}"
+  
+= render :partial => "form", :locals => {:fighter => @fighter}
