@@ -1,4 +1,4 @@
-class Admin::FightersController < Admin::AdminController
+class Members::FightersController < Members::MembersController
 
   FIGHTERS_PER_PAGE = 20
   

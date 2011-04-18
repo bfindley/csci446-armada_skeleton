@@ -3,6 +3,10 @@ module ApplicationHelper
   def admin_menu_items(user)
     render :partial => 'layouts/admin_menu_items' if user.is_admin?
   end
+  
+  def member_menu_items(user)
+    render :partial => 'layouts/member_menu_items' if user.is_member?
+  end
 
   def menubar(user)
     render :partial => 'layouts/menubar' if user

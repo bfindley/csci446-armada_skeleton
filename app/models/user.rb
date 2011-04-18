@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     role_symbols.include?(:administrator) || role_symbols.include?(:developer)
   end
   
+  def is_member?
+    role_symbols.include?(:member)
+  end
+  
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

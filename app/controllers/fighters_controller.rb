@@ -1,7 +1,9 @@
 class FightersController < ApplicationController
 
+  FIGHTERS_PER_PAGE = 20
+  
   def index
-    @fighters = Fighter.all
+    @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
 
     respond_to do |format|
       format.html # index.html.erb

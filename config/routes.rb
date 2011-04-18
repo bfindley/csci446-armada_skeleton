@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :members do |members|
     members.resources :users, :only => [:show, :edit, :update]
+    members.resources :fighters
     members.root :controller => 'members', :action => 'index'
   end
 
