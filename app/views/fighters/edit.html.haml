@@ -21,8 +21,10 @@
     = f.text_area :description
   %p
     = f.label :cost
-    %br/
     = f.text_field :cost
+  %p
+    = f.label :user_id
+    = f.text_field :user_id    
   %p
     = f.submit 'Update'
 = link_to 'Show', @fighter
