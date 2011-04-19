@@ -32,6 +32,9 @@ a
   img
     border: 0px
 
+b
+  font-weight: bold
+
 #wrapper
   width: 800px
   margin: auto
@@ -99,6 +102,8 @@ h2 .action
     font-size: 14px
     text-decoration: none
     vertical-align: middle
+  form, div
+    display: inline
 
 body.index
   table
@@ -124,3 +129,20 @@ p.hint
     margin-left: 0px
     padding-left: 0px
     list-style-type: none
+    
+.pagination
+  text-align: center
+  
+table.main
+  margin:
+    top: 25px
+    bottom: 25px
+  tr
+    &:nth-child(even)
+      :background-color !lt_gray
+    &:nth-child(odd)
+      :background-color !pale_blue
+      
+div.img_container
+  margin: 15px
+  float: left

@@ -1,6 +1,6 @@
 class FightersController < ApplicationController
 
-  FIGHTERS_PER_PAGE = 20
+  FIGHTERS_PER_PAGE = 10
   
   def index
     @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
@@ -19,5 +19,12 @@ class FightersController < ApplicationController
       format.xml  { render :xml => @fighter }
     end
   end
-
+  
+  def new
+    if user
+      redirect_to :controller => "members", :action => "new"
+    else
+      redirect_to :controller => "users", :action => "new"
+    end
+  end
 end

@@ -1,6 +1,8 @@
 class Members::FightersController < Members::MembersController
 
-  FIGHTERS_PER_PAGE = 20
+  before_filter :get_users, :only => [:new, :create, :edit, :update]
+
+  FIGHTERS_PER_PAGE = 10
   
   def index
     @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
@@ -29,17 +31,13 @@ class Members::FightersController < Members::MembersController
     end
   end
 
-  def edit
-    @fighter = Fighter.find(params[:id])
-  end
-
   def create
     @fighter = Fighter.new(params[:fighter])
-
+    @fighter.user = @current_user
     respond_to do |format|
       if @fighter.save
-        flash[:success] = '#{@fighter.name} was successfully created.'
-        format.html { redirect_to admin_fighters_url }
+        flash[:success] = "#{@fighter.name} was successfully created."
+        format.html { redirect_to members_fighters_url }
         format.xml  { render :xml => @fighter, :status => :created, :location => @fighter }
       else
         format.html { render :action => "new" }
@@ -47,13 +45,19 @@ class Members::FightersController < Members::MembersController
       end
     end
   end
+  
+  def edit
+    @fighter = Fighter.find(params[:id])
+  end
 
   def update
     @fighter = Fighter.find(params[:id])
 
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
-        format.html { redirect_to admin_fighters_url }
+
+        flash[:success] = "#{@fighter.name} was successfully updated."
+        format.html { redirect_to members_fighters_url }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -67,8 +71,15 @@ class Members::FightersController < Members::MembersController
     @fighter.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_fighters_url }
+      flash[:success] = "#{@fighter.name} was successfully deleted."
+      format.html { redirect_to members_fighters_url }
       format.xml  { head :ok }
     end
   end
+  
+  private
+    
+    def get_users
+      @users = User.all
+    end
 end

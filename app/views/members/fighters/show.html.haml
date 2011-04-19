@@ -25,10 +25,11 @@
   = h @fighter.pilot_name
 %p
   = h @fighter.description
+
 %br
 %h2
   Cost: #{h @fighter.cost}
-  
+
 = link_to 'Edit', edit_admin_fighter_path(@fighter)
 |
 \#{link_to 'Back', fighters_path}

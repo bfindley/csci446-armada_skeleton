@@ -4,6 +4,8 @@ class Fighter < ActiveRecord::Base
   
   validates_numericality_of :cost
   
+  validates_numericality_of :cost
+  
   def date
     self.created_at.strftime("%b %d, %Y")
   end
@@ -12,5 +14,6 @@ class Fighter < ActiveRecord::Base
     #@favorite = Favorite.new( {:user_id => current_user.id, :fighter_id => self.id} ) 
     puts "*************************************************************************"
   end
+  
   
 end

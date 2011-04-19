@@ -2,11 +2,9 @@
   %td
     = image_tag("small_placeholder.jpg")
   %td
-    = link_to fighter.name, admin_fighter_path(fighter)
+    = link_to fighter.name, fighter_path(fighter)
     =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"
     %br/
-    =h fighter.description
+    = truncate(fighter.description,50)
   %td
-    = link_to image_tag('icon_small_show.png'), admin_fighter_path(fighter)
-    = link_to image_tag('icon_small_edit.png'), edit_admin_fighter_path(fighter)
-    = link_to image_tag('icon_small_delete.png'), admin_fighter_path(fighter), :confirm => 'Are you sure?', :method => :delete
+    = link_to image_tag('icon_small_show.png'), fighter_path(fighter)

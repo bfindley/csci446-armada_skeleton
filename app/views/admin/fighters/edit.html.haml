@@ -1,7 +1,21 @@
 - content_for :title do
-  = "Editing #{@fighter.name}"
+  = "Edit #{@fighter.name}"
+
 %h2
   = "Editing #{@fighter.name}"
+  .action
+    = link_to image_tag('icon_small_larrow.png'), admin_fighters_path
+    = link_to 'back to list', admin_fighters_path
+  .action
+    = link_to image_tag('icon_small_delete.png'),
+              admin_fighter_path(@fighter),
+              :confirm => 'Are you sure?',
+              :method => :delete
+    = link_to 'delete',
+              admin_fighter_path(@fighter),
+              :confirm => 'Are you sure?',
+              :method => :delete  
+
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"
   
