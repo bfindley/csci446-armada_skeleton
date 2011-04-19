@@ -52,7 +52,7 @@ class Admin::FightersController < Admin::AdminController
 
   def update
     @fighter = Fighter.find(params[:id])
-
+    
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
         flash[:success] = "#{@fighter.name} was successfully updated."
@@ -70,6 +70,7 @@ class Admin::FightersController < Admin::AdminController
     @fighter.destroy
 
     respond_to do |format|
+      flash[:success] = "#{@fighter.name} was successfully deleted."
       format.html { redirect_to admin_fighters_url }
       format.xml  { head :ok }
     end

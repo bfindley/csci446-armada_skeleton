@@ -19,5 +19,12 @@ class FightersController < ApplicationController
       format.xml  { render :xml => @fighter }
     end
   end
-
+  
+  def new
+    if user
+      redirect_to :controller => "members", :action => "new"
+    else
+      redirect_to :controller => "users", :action => "new"
+    end
+  end
 end

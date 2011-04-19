@@ -70,6 +70,7 @@ class Members::FightersController < Members::MembersController
     @fighter.destroy
 
     respond_to do |format|
+      flash[:success] = "#{@fighter.name} was successfully deleted."
       format.html { redirect_to members_fighters_url }
       format.xml  { head :ok }
     end

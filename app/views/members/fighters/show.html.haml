@@ -3,7 +3,10 @@
 
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"
-%p
+
+%br  
+
+%div.img_container
   = image_tag("placeholder.jpg")
 %p
   %b Name:
@@ -21,14 +24,11 @@
   %b Pilot name:
   = h @fighter.pilot_name
 %p
-  %b Description:
   = h @fighter.description
-%p
-  %b Cost:
-  = h @fighter.cost
-%p
-  %b User:
-  = h @fighter.user_id
+%br
+%h2
+  Cost: #{h @fighter.cost}
+
 = link_to 'Edit', edit_admin_fighter_path(@fighter)
 |
 \#{link_to 'Back', fighters_path}

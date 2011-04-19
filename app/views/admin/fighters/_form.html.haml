@@ -1,6 +1,6 @@
 - form_for [:admin, @fighter] do |f|
   = f.error_messages
-  %p
+  %div.img_container
     = image_tag("placeholder.jpg")
   %p
     = f.label :name
@@ -27,7 +27,7 @@
     = f.label :user_id
     = f.select :user_id, @users.collect { |user| [user.to_s, user.id]}   
   %p
-    = f.submit 'Update'
+    = f.submit 'Move Zig'
 = link_to 'Show', @fighter
 |
 \#{link_to 'Back', admin_fighters_path}
