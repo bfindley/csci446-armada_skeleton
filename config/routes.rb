@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :favorites
+
   map.resources :fighters
 
 
@@ -15,12 +17,14 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :roles
     admin.resources :users
     admin.resources :fighters
+	  admin.resources :fighters, :member => { :favorites => :put }
     admin.root :controller => 'admin', :action => 'index'
   end
 
   map.namespace :members do |members|
     members.resources :users, :only => [:show, :edit, :update]
     members.resources :fighters
+    members.resources :fighters, :member => { :favorites => :put }
     members.root :controller => 'members', :action => 'index'
   end
 

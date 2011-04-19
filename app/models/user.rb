@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :fighters
+  has_many :favorites
 
   acts_as_authentic
 
