@@ -42,7 +42,7 @@ class Members::MembersController < ApplicationController
 
   def create
     @fighter = Fighter.new(params[:fighter])
-
+    @fighter.user = current_user
     respond_to do |format|
       if @fighter.save
         format.html { redirect_to(@fighter, :notice => 'Fighter was successfully created.') }

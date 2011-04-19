@@ -33,7 +33,7 @@ class Members::FightersController < Members::MembersController
 
   def create
     @fighter = Fighter.new(params[:fighter])
-
+    @fighter.user = @current_user
     respond_to do |format|
       if @fighter.save
         flash[:success] = "#{@fighter.name} was successfully created."
