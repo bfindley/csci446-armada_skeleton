@@ -10,9 +10,13 @@ class Fighter < ActiveRecord::Base
     self.created_at.strftime("%b %d, %Y")
   end
   
-  def update_favorite
-    #@favorite = Favorite.new( {:user_id => current_user.id, :fighter_id => self.id} ) 
-    puts "*************************************************************************"
+  def get_favorite_image(current_user)
+    @favorite = Favorite.find(:first, :conditions => {:user_id => current_user.id, :fighter_id => self.id})
+    if(@favorite.nil?)
+      return 'icon_small_star_inactive.png'
+    else
+      return 'icon_small_star.png'
+    end
   end
   
   

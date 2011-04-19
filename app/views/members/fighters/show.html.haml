@@ -1,6 +1,6 @@
 %h2
   = @fighter.name
-
+= link_to( image_tag(@fighter.get_favorite_image(current_user)), favorites_members_fighter_path(@fighter), :method => :put)
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"
 

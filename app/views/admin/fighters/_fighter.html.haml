@@ -4,7 +4,8 @@
   %td
     = link_to fighter.name, admin_fighter_path(fighter)
     =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"
-    = link_to( image_tag('icon_small_star_inactive.png'), admin_fighters_path, html_options = {:id => fighter.id})
+    - if fighter.user == current_user
+      = link_to( image_tag(fighter.get_favorite_image(current_user)), favorites_admin_fighter_path(fighter), :method => :put)
     %br/
     = truncate(fighter.description,:length => 50)
     
