@@ -71,4 +71,6 @@ class Admin::FightersController < Admin::AdminController
       format.xml  { head :ok }
     end
   end
+  
+
 end
