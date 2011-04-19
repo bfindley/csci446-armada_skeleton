@@ -28,6 +28,3 @@
     = f.select :user_id, @users.collect { |user| [user.to_s, user.id]}   
   %p
     = f.submit 'Move Zig'
-= link_to 'Show', @fighter
-|
-\#{link_to 'Back', admin_fighters_path}

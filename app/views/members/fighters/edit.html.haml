@@ -2,6 +2,19 @@
   = "Editing #{@fighter.name}"
 %h2
   = "Editing #{@fighter.name}"
+  .action
+    = link_to image_tag('icon_small_larrow.png'), members_fighters_path
+    = link_to 'back to list', members_fighters_path
+  .action
+    = link_to image_tag('icon_small_delete.png'),
+              members_fighters_path(@fighter),
+              :confirm => 'Are you sure?',
+              :method => :delete
+    = link_to 'delete',
+              members_fighters_path(@fighter),
+              :confirm => 'Are you sure?',
+              :method => :delete
+
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"
   

@@ -1,4 +1,7 @@
 - content_for :title do
   Create Fighter
 
+%h2
+  = "New Fighter"
+
 = render :partial => "form", :locals => {:fighter => @fighter}

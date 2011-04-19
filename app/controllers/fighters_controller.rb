@@ -21,8 +21,12 @@ class FightersController < ApplicationController
   end
   
   def new
-    if user
-      redirect_to :controller => "members", :action => "new"
+    if current_user
+      if current_user.is_admin?
+        redirect_to :controller => "admin/fighters", :action => "new"
+      elsif current_user.is_member?
+        redirect_to :controller => "members/fighters", :action => "new"
+      end
     else
       redirect_to :controller => "users", :action => "new"
     end

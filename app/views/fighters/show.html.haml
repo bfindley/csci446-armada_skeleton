@@ -1,5 +1,8 @@
 %h2
   = @fighter.name
+  .action
+    = link_to image_tag('icon_small_larrow.png'), fighters_path
+    = link_to 'back to list', fighters_path
 
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"
@@ -28,7 +31,3 @@
 %br
 %h2
   Cost: #{h @fighter.cost}
-  
-= link_to 'Edit', edit_fighter_path(@fighter)
-|
-\#{link_to 'Back', fighters_path}

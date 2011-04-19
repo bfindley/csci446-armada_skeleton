@@ -1,5 +1,22 @@
 %h2
   = @fighter.name
+  .action
+    = link_to image_tag('icon_small_larrow.png'), admin_fighters_path
+    = link_to 'back to list', admin_fighters_path
+  .action
+    = link_to image_tag('icon_small_edit.png'),
+              edit_admin_fighter_path(@fighter)
+    = link_to 'edit',
+              edit_admin_fighter_path(@fighter)
+  .action
+    = link_to image_tag('icon_small_delete.png'),
+              admin_fighter_path(@fighter),
+              :confirm => 'Are you sure?',
+              :method => :delete
+    = link_to 'delete',
+              admin_fighter_path(@fighter),
+              :confirm => 'Are you sure?',
+              :method => :delete
 
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"
@@ -28,7 +45,3 @@
 %br
 %h2
   Cost: #{h @fighter.cost}
-  
-= link_to 'Edit', edit_admin_fighter_path(@fighter)
-|
-\#{link_to 'Back', fighters_path}
