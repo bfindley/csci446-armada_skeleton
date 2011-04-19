@@ -3,6 +3,7 @@
   .action
     = link_to image_tag('icon_small_larrow.png'), admin_fighters_path
     = link_to 'back to list', admin_fighters_path
+    = link_to( image_tag(@fighter.get_favorite_image(current_user)), favorites_admin_fighter_path(@fighter), :method => :put)
   .action
     = link_to image_tag('icon_small_edit.png'),
               edit_admin_fighter_path(@fighter)
@@ -18,6 +19,7 @@
               :confirm => 'Are you sure?',
               :method => :delete
 
+    
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"
 

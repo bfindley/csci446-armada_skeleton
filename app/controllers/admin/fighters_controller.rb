@@ -5,7 +5,7 @@ class Admin::FightersController < Admin::AdminController
   before_filter :get_users, :only => [:new, :create, :edit, :update]
   
   def index
-    @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
+    @fighters = Fighter.paginate(:page => params[:page], :include => [:user, :favorites], :per_page => FIGHTERS_PER_PAGE)
 
     respond_to do |format|
       format.html 
@@ -73,6 +73,22 @@ class Admin::FightersController < Admin::AdminController
       flash[:success] = "#{@fighter.name} was successfully deleted."
       format.html { redirect_to admin_fighters_url }
       format.xml  { head :ok }
+    end
+  end
+  
+  def favorites
+    @favorite = Favorite.find(:first, :conditions => {:user_id => current_user.id, :fighter_id => params[:id]})
+    if @favorite.nil?
+      @favorite = Favorite.new( {:user_id => current_user.id, :fighter_id => params[:id]} ) 
+      if @favorite.save
+        flash[:success] = "Favorite added."
+        redirect_to :back
+
+      end
+    else
+      @favorite.destroy
+      flash[:success] = "Favorite removed."
+      redirect_to :back
     end
   end
   

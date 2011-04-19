@@ -1,8 +1,10 @@
 %h2
   = @fighter.name
+
   .action
     = link_to image_tag('icon_small_larrow.png'), members_fighters_path
     = link_to 'back to list', members_fighters_path
+    = link_to( image_tag(@fighter.get_favorite_image(current_user)), favorites_members_fighter_path(@fighter), :method => :put)
   - if(@fighter.user == current_user)
     .action
       = link_to image_tag('icon_small_edit.png'),
@@ -18,6 +20,7 @@
                 members_fighter_path(@fighter),
                 :confirm => 'Are you sure?',
                 :method => :delete
+      
 
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"
