@@ -33,7 +33,7 @@ class Members::FightersController < Members::MembersController
 
   def create
     @fighter = Fighter.new(params[:fighter])
-
+    @fighter.user = @current_user
     respond_to do |format|
       if @fighter.save
         flash[:success] = "#{@fighter.name} was successfully created."
@@ -55,6 +55,7 @@ class Members::FightersController < Members::MembersController
 
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
+
         flash[:success] = "#{@fighter.name} was successfully updated."
         format.html { redirect_to members_fighters_url }
         format.xml  { head :ok }

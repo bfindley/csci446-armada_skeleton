@@ -2,10 +2,11 @@
   My Fighters
 %h2
   My Fighters
+
 %p
   = "#{pluralize(Fighter.count,'fighters')} as of #{Time.now.strftime("%b %d, %Y")}"
 .fighters
   = fighters_list(@fighters)
-  
+
 %br/
 = link_to 'New fighter', new_members_fighter_path

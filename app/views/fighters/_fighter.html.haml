@@ -5,6 +5,6 @@
     = link_to fighter.name, fighter_path(fighter)
     =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"
     %br/
-    =h fighter.description
+    = truncate(fighter.description,50)
   %td
     = link_to image_tag('icon_small_show.png'), fighter_path(fighter)
