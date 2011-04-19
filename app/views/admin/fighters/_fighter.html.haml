@@ -6,7 +6,10 @@
     =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"
     %br/
     = truncate(fighter.description,50)
-
+    - if fighter.description.length > 50
+      %a{:id => "more_#{fighter.id}"}
+        = "more"
+    
   %td
     = link_to image_tag('icon_small_show.png'), admin_fighter_path(fighter)
     = link_to image_tag('icon_small_edit.png'), edit_admin_fighter_path(fighter)
