@@ -72,5 +72,7 @@ class Admin::FightersController < Admin::AdminController
     end
   end
   
-
+  def update_favorites
+    @favorite = Favorite.new( {:user_id => current_user.id, :fighter_id => params[:id]} ) 
+  end
 end
