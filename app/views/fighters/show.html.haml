@@ -1,0 +1,33 @@
+%h2
+  = @fighter.name
+  .action
+    = link_to image_tag('icon_small_larrow.png'), fighters_path
+    = link_to 'back to list', fighters_path
+
+%p
+  = "created by #{@fighter.user} on #{@fighter.date}"
+
+%br  
+
+%div.img_container
+  = image_tag("placeholder.jpg")
+%p
+  %b Name:
+  = h @fighter.name
+%p
+  %b Fighter type:
+  = h @fighter.fighter_type
+%p
+  %b Primary weapon:
+  = h @fighter.primary_weapon
+%p
+  %b Secondary weapon:
+  = h @fighter.secondary_weapon
+%p
+  %b Pilot name:
+  = h @fighter.pilot_name
+%p
+  = h @fighter.description
+%br
+%h2
+  Cost: #{h @fighter.cost}
