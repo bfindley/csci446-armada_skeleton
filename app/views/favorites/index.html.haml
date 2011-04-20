@@ -1,10 +1,9 @@
 - content_for :title do
-  My Fighters
+  My Favorites
 %h2
   My Fighters
   .action
     = button_to 'New Fighter', new_members_fighter_path, {:method => :get} 
-%p
-  = "#{pluralize(Fighter.count,'fighters')} as of #{Time.now.strftime("%b %d, %Y")}"
+
 .fighters
   = fighters_list(@fighters)

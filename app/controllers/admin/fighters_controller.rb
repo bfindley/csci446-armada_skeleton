@@ -5,8 +5,9 @@ class Admin::FightersController < Admin::AdminController
   before_filter :get_users, :only => [:new, :create, :edit, :update]
   
   def index
-    @fighters = Fighter.paginate(:page => params[:page], :include => [:user, :favorites], :per_page => FIGHTERS_PER_PAGE)
-
+    @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
+    @favorites = Favorite.get_favorites_hash(current_user)
+    
     respond_to do |format|
       format.html 
       format.xml  { render :xml => @fighters }
@@ -83,7 +84,6 @@ class Admin::FightersController < Admin::AdminController
       if @favorite.save
         flash[:success] = "Favorite added."
         redirect_to :back
-
       end
     else
       @favorite.destroy

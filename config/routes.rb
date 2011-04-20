@@ -1,6 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :favorites
-
   map.resources :fighters
 
 
@@ -22,10 +20,14 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.namespace :members do |members|
+    members.my_favorite_fighters 'my_favorite_fighters', :conditions => {:method => :get}, :controller => "fighters", :action => "my_favorite_fighters"
+    members.my_fighters 'my_fighters', :conditions => {:method => :get}, :controller => "fighters", :action => "my_fighters"
+    
     members.resources :users, :only => [:show, :edit, :update]
     members.resources :fighters
-    members.resources :fighters, :member => { :favorites => :put }
+    members.resources :fighters, :collections => { :my_favorite_fighters => :get, :my_fighters => :get}, :member => { :favorites => :put }
     members.root :controller => 'members', :action => 'index'
+    
   end
 
 end

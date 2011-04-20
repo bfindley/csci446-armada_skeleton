@@ -9,7 +9,7 @@ class Fighter < ActiveRecord::Base
   def date
     self.created_at.strftime("%b %d, %Y")
   end
-  
+
   def get_favorite_image(current_user)
     @favorite = Favorite.find(:first, :conditions => {:user_id => current_user.id, :fighter_id => self.id})
     if(@favorite.nil?)
@@ -18,6 +18,4 @@ class Fighter < ActiveRecord::Base
       return 'icon_small_star.png'
     end
   end
-  
-  
 end

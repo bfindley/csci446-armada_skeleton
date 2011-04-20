@@ -6,7 +6,8 @@ class Members::FightersController < Members::MembersController
   
   def index
     @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
-
+    @favorites = Favorite.get_favorites_hash(current_user)
+    
     respond_to do |format|
       format.html 
       format.xml  { render :xml => @fighters }
@@ -90,6 +91,27 @@ class Members::FightersController < Members::MembersController
       @favorite.destroy
       flash[:success] = "Favorite removed."
       redirect_to :back
+    end
+  end
+  
+  def my_favorite_fighters
+    @fighters = Fighter.paginate(:page => params[:page], :joins => "LEFT JOIN 'favorites' on fighters.id = favorites.fighter_id",
+                                 :conditions => ["favorites.user_id = ?",current_user.id], :per_page => FIGHTERS_PER_PAGE)
+    @favorites = Favorite.get_favorites_hash(current_user)
+
+    respond_to do |format|
+      format.html 
+      format.xml  { render :xml => @fighters }
+    end
+  end
+  
+  def my_fighters
+    @fighters = Fighter.paginate(:page => params[:page], :include => :user, :conditions => {:user_id => current_user.id}, :per_page => FIGHTERS_PER_PAGE)
+    @favorites = Favorite.get_favorites_hash(current_user)
+
+    respond_to do |format|
+      format.html 
+      format.xml  { render :xml => @fighters }
     end
   end
   
