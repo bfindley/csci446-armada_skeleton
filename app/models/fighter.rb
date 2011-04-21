@@ -2,7 +2,14 @@ class Fighter < ActiveRecord::Base
   belongs_to :user
   has_many :favorites
   
-  validates_numericality_of :cost
+  has_attached_file :photo, :styles => {:normal => "200x200>", :thumb => "60x60>"}
+  
+  validates_presence_of :name
+  validates_presence_of :fighter_type
+  validates_presence_of :primary_weapon
+  validates_presence_of  :cost
+  validates_presence_of :description
+  validates_attachment_presence :photo 
   
   validates_numericality_of :cost
   

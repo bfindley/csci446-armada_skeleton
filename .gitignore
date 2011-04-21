@@ -13,6 +13,7 @@ db/integration
 db/sphinx
 public/assets
 public/stylesheets/compiled/*
+public/system/photos/*
 coverage/*
 test/coverage/*
 .vagrant
