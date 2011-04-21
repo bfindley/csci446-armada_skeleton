@@ -1,6 +1,6 @@
 %tr
   %td
-    = image_tag("small_placeholder.jpg")
+    = image_tag(fighter.photo.url(:thumb))
   %td
     = link_to fighter.name, fighter_path(fighter)
     =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"

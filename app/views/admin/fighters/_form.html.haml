@@ -1,7 +1,8 @@
 - form_for [:admin, @fighter] do |f|
   = f.error_messages
-  %div.img_container
-    = image_tag("placeholder.jpg")
+  - if !@fighter.new_record?
+    %div.img_container
+      = image_tag(@fighter.photo.url(:normal))
   %p
     = f.label :name
     = f.text_field :name

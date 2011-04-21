@@ -25,7 +25,7 @@
 %br  
 
 %div.img_container
-  = image_tag("placeholder.jpg")
+  = image_tag(@fighter.photo.url(:normal))
 %p
   %b Name:
   = h @fighter.name
