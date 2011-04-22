@@ -24,24 +24,15 @@ module ApplicationHelper
     "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://fonts.googleapis.com/css?family=#{face}\" />"
   end
   
-  #def insert_more_text(text, maxchars)
-  #  
-  #  page.insert_html :bottom, 
-  #    "checked_task_items_#{task_list.id}", 
-  #    :partial => 'tasks/checked_task',
-  #    :locals => {  
-  #      :checked_task => task,
-  #      :calendar => calendar, 
-  #      :task_list => task_list }
-  #  
-  #  
-  #  more_link = link_to_function(" More...", "$('more').hide(); $('hidden').show();'", :id => 'more')
-  #
-  #
-  #  content_tag(:div, html_options) do 
-  #    body[0..49] + more_link + 
-  #      content_tag(:span, body[50..-1], :style => "display:none", :id => "hidden")
-  #  end
-  #end
+  #not a good separation of logic, but works
+  def sample_with_more(body, html_options = {})
+    more_link = link_to_function(" more...", "$('more').hide(); $('hidden').show();", :id => 'more')
+
+    content_tag(:div, html_options) do 
+      body[0..49] + more_link + 
+        content_tag(:span, body[50..-1], :style => "display:none", :id => "hidden")
+    end
+  end
+
     
 end
