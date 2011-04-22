@@ -11,7 +11,7 @@
       = link_to( image_tag('icon_small_star_inactive.png'), favorites_members_fighter_path(fighter), :method => :put)
 
     %br/
-    = truncate(fighter.description,:length => 50)
+    = sample_with_more(fighter.description, 50, html_options = {})
   %td
     = link_to image_tag('icon_small_show.png'), members_fighter_path(fighter)
     - if(fighter.user == current_user)

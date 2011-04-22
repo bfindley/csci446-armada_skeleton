@@ -10,10 +10,7 @@
     - else
       = link_to( image_tag('icon_small_star_inactive.png'), favorites_admin_fighter_path(fighter), :method => :put)
     %br/
-    = truncate(fighter.description,:length => 50)
-    - if fighter.description.length > 50
-      %a{:id => "more_#{fighter.id}"}
-        = "more"
+    = sample_with_more(fighter.description, 50, html_options = {})
     
   %td
     = link_to image_tag('icon_small_show.png'), admin_fighter_path(fighter)

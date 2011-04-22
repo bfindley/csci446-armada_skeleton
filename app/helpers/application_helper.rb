@@ -25,12 +25,16 @@ module ApplicationHelper
   end
   
   #not a good separation of logic, but works
-  def sample_with_more(body, html_options = {})
-    more_link = link_to_function(" more...", "$('more').hide(); $('hidden').show();", :id => 'more')
+  def sample_with_more(body, max, html_options = {})
+    if body.length < max
+      return content_tag(:div, html_options) { body }
+    end
+    
+    more_link = link_to_function("more...", "$('#more').hide(); $('#hidden').show();", :id => 'more')
 
     content_tag(:div, html_options) do 
-      body[0..49] + more_link + 
-        content_tag(:span, body[50..-1], :style => "display:none", :id => "hidden")
+      body[0..(max-1)] + " " + more_link + 
+        content_tag(:span, body[max..-1], :style => "display:none", :id => "hidden")
     end
   end
 
