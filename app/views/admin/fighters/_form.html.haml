@@ -28,4 +28,4 @@
     = f.label :user_id
     = f.select :user_id, @users.collect { |user| [user.to_s, user.id]}   
   %p
-    = f.submit 'Move Zig'
+    = f.submit 'Move Zig', :class => "bright"
