@@ -7,7 +7,8 @@ module FavoritesHelper
       path,
       'data-method' => :put,
       'data-remote' => true,
-      :onclick => '$("#star_on", this).toggle();$("#star_off", this).toggle();')
+      :onclick => '$("#star_on", this).toggle();$("#star_off", this).toggle();',
+      :title => "toggle as a favorite")
   end
 
 end

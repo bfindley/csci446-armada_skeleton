@@ -14,6 +14,8 @@
               members_fighters_path(@fighter),
               :confirm => 'Are you sure?',
               :method => :delete
+  .action
+    = favorite_toggle @favorites[@fighter.id], favorites_members_fighter_path(@fighter)
 
 %p
   = "created by #{@fighter.user} on #{@fighter.date}"

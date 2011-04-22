@@ -6,7 +6,7 @@
     =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"
     = favorite_toggle @favorites[fighter.id], favorites_members_fighter_path(fighter)
     %br
-    = sample_with_more(fighter.description, 50, html_options = {})
+    = sample_with_more(fighter.description, 50)
   %td
     = link_to image_tag('icon_small_show.png'), members_fighter_path(fighter)
     - if(fighter.user == current_user)

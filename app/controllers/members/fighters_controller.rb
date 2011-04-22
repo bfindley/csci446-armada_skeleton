@@ -1,12 +1,12 @@
 class Members::FightersController < Members::MembersController
 
   before_filter :get_users, :only => [:new, :create, :edit, :update]
+  before_filter :get_favorites, :only => [:index, :edit]
 
   FIGHTERS_PER_PAGE = 10
   
   def index
     @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
-    @favorites = Favorite.get_favorites_hash(current_user)
     
     respond_to do |format|
       format.html 
@@ -123,5 +123,9 @@ class Members::FightersController < Members::MembersController
     
     def get_users
       @users = User.all
+    end
+    
+    def get_favorites
+      @favorites = Favorite.get_favorites_hash(current_user)
     end
 end
