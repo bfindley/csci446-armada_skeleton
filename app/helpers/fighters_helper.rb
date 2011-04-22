@@ -1,2 +1,2 @@
-module FightersHelper
+module FightersHelper  
 end

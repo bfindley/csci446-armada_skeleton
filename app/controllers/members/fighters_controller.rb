@@ -85,7 +85,7 @@ class Members::FightersController < Members::MembersController
   def favorites
     @favorite = Favorite.find(:first, :conditions => {:user_id => current_user.id, :fighter_id => params[:id]})
     if @favorite.nil?
-      @favorite = Favorite.new( {:user_id => current_user.id, :fighter_id => params[:id]} ) 
+      @favorite = Favorite.new( {:user_id => current_user.id, :fighter_id => params[:id]} )
       if @favorite.save
         flash[:success] = "Favorite added."
         redirect_to :back

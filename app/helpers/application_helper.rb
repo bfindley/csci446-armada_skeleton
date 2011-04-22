@@ -24,7 +24,6 @@ module ApplicationHelper
     "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://fonts.googleapis.com/css?family=#{face}\" />"
   end
   
-  #not a good separation of logic, but works
   def sample_with_more(body, max, html_options = {})
     if body.length < max
       return content_tag(:div, html_options) { body }

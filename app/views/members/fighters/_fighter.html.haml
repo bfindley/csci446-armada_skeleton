@@ -4,13 +4,8 @@
   %td
     = link_to fighter.name, members_fighter_path(fighter)
     =h "by #{fighter.user} (#{fighter.cost} ArmadaBucks)"
-    
-    - if @favorites[fighter.id]
-      = link_to( image_tag('icon_small_star.png'), favorites_members_fighter_path(fighter), :method => :put)
-    - else
-      = link_to( image_tag('icon_small_star_inactive.png'), favorites_members_fighter_path(fighter), :method => :put)
-
-    %br/
+    = favorite_toggle @favorites[fighter.id], favorites_members_fighter_path(fighter)
+    %br
     = sample_with_more(fighter.description, 50, html_options = {})
   %td
     = link_to image_tag('icon_small_show.png'), members_fighter_path(fighter)
