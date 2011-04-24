@@ -9,7 +9,7 @@ class Fighter < ActiveRecord::Base
   validates_presence_of :primary_weapon
   validates_presence_of  :cost
   validates_presence_of :description
-  validates_attachment_presence :photo 
+  #validates_attachment_presence :photo 
   
   validates_numericality_of :cost
   
