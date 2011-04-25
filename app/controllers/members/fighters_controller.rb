@@ -2,6 +2,7 @@ class Members::FightersController < Members::MembersController
 
   before_filter :get_users, :only => [:new, :create, :edit, :update]
   before_filter :get_favorites, :only => [:index, :edit, :show]
+  before_filter :find_fighter, :only => [:edit, :update, :destroy]
 
   FIGHTERS_PER_PAGE = 10
   
@@ -25,16 +26,12 @@ class Members::FightersController < Members::MembersController
 
   def new
     @fighter = Fighter.new
-
-    respond_to do |format|
-      format.html 
-      format.xml  { render :xml => @fighter }
-    end
   end
 
   def create
     @fighter = Fighter.new(params[:fighter])
     @fighter.user = @current_user
+    
     respond_to do |format|
       if @fighter.save
         flash[:success] = "#{@fighter.name} was successfully created."
@@ -48,7 +45,6 @@ class Members::FightersController < Members::MembersController
   end
   
   def edit
-    @fighter = Fighter.find(params[:id])
     if @fighter.user != current_user
       flash[:notice] = "You do not have permission to modify that resource."
       redirect_to :action => :index
@@ -56,14 +52,15 @@ class Members::FightersController < Members::MembersController
   end
 
   def update
-    @fighter = Fighter.find(params[:id])
-
     respond_to do |format|
-      if @fighter.update_attributes(params[:fighter])
-
+      if @fighter.user == current_user && @fighter.update_attributes(params[:fighter])
         flash[:success] = "#{@fighter.name} was successfully updated."
         format.html { redirect_to members_fighters_url }
         format.xml  { head :ok }
+      elsif @fighter.user != current_user
+        flash[:notice] = "You do not have permission to modify that resource."
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @fighter.errors, :status => 403 }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @fighter.errors, :status => :unprocessable_entity }
@@ -72,24 +69,34 @@ class Members::FightersController < Members::MembersController
   end
 
   def destroy
-    @fighter = Fighter.find(params[:id])
-    @fighter.destroy
-
     respond_to do |format|
-      flash[:success] = "#{@fighter.name} was successfully deleted."
-      format.html { redirect_to members_fighters_url }
-      format.xml  { head :ok }
+      if @fighter.user == current_user
+        @fighter.destroy
+        flash[:success] = "#{@fighter.name} was successfully deleted."
+        format.html { redirect_to members_fighters_url }
+        format.xml  { head :ok }
+      else
+        flash[:notice] = "You do not have permission to modify that resource."
+        format.html { redirect_to members_fighters_url }
+        format.xml  { render :xml => @fighter.errors, :status => 403 }
+      end
     end
   end
   
   def favorites
-    @favorite = Favorite.find(:first, :conditions => {:user_id => current_user.id, :fighter_id => params[:id]})
+    @favorite = Favorite.find(:first, :conditions => {
+      :user_id => current_user.id,
+      :fighter_id => params[:id]
+    })
+    
     if @favorite.nil?
-      @favorite = Favorite.new( {:user_id => current_user.id, :fighter_id => params[:id]} )
+      @favorite = Favorite.new({
+        :user_id => current_user.id,
+        :fighter_id => params[:id]
+      })
       if @favorite.save
         flash[:success] = "Favorite added."
         redirect_to :back
-
       end
     else
       @favorite.destroy
@@ -99,8 +106,10 @@ class Members::FightersController < Members::MembersController
   end
   
   def my_favorite_fighters
-    @fighters = Fighter.paginate(:page => params[:page], :joins => "LEFT JOIN favorites on fighters.id = favorites.fighter_id",
-                                 :conditions => ["favorites.user_id = ?",current_user.id], :per_page => FIGHTERS_PER_PAGE)
+    @fighters = Fighter.paginate(:page => params[:page],
+      :joins => "LEFT JOIN favorites on fighters.id = favorites.fighter_id",
+      :conditions => ["favorites.user_id = ?",current_user.id],
+      :per_page => FIGHTERS_PER_PAGE)
     @favorites = Favorite.get_favorites_hash(current_user)
 
     respond_to do |format|
@@ -110,7 +119,10 @@ class Members::FightersController < Members::MembersController
   end
   
   def my_fighters
-    @fighters = Fighter.paginate(:page => params[:page], :include => :user, :conditions => {:user_id => current_user.id}, :per_page => FIGHTERS_PER_PAGE)
+    @fighters = Fighter.paginate(:page => params[:page],
+      :include => :user,
+      :conditions => {:user_id => current_user.id},
+      :per_page => FIGHTERS_PER_PAGE)
     @favorites = Favorite.get_favorites_hash(current_user)
 
     respond_to do |format|
@@ -127,5 +139,9 @@ class Members::FightersController < Members::MembersController
     
     def get_favorites
       @favorites = Favorite.get_favorites_hash(current_user)
+    end
+    
+    def find_fighter
+      @fighter = Fighter.find(params[:id])
     end
 end

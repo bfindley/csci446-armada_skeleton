@@ -25,11 +25,6 @@ class Admin::FightersController < Admin::AdminController
 
   def new
     @fighter = Fighter.new
-
-    respond_to do |format|
-      format.html 
-      format.xml  { render :xml => @fighter }
-    end
   end
 
   def create
@@ -49,10 +44,6 @@ class Admin::FightersController < Admin::AdminController
 
   def edit
     @fighter = Fighter.find(params[:id])
-    if @fighter.user != current_user
-      flash[:notice] = "You do not have permission to modify that resource."
-      redirect_to :action => :index
-    end
   end
 
   def update
