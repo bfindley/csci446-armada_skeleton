@@ -28,7 +28,7 @@ class FightersController < ApplicationController
         redirect_to :controller => "members/fighters", :action => "new"
       end
     else
-      redirect_to :controller => "users", :action => "new"
+      redirect_to :controller => "user_sessions", :action => "new"
     end
   end
 end
