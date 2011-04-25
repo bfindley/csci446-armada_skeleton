@@ -99,7 +99,7 @@ class Members::FightersController < Members::MembersController
   end
   
   def my_favorite_fighters
-    @fighters = Fighter.paginate(:page => params[:page], :joins => "LEFT JOIN 'favorites' on fighters.id = favorites.fighter_id",
+    @fighters = Fighter.paginate(:page => params[:page], :joins => "LEFT JOIN favorites on fighters.id = favorites.fighter_id",
                                  :conditions => ["favorites.user_id = ?",current_user.id], :per_page => FIGHTERS_PER_PAGE)
     @favorites = Favorite.get_favorites_hash(current_user)
 
