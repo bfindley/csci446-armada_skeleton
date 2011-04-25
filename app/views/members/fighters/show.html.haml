@@ -4,8 +4,6 @@
   .action
     = link_to image_tag('icon_small_larrow.png'), members_fighters_path
     = link_to 'back to list', members_fighters_path
-    = link_to( image_tag(@fighter.get_favorite_image(current_user)), favorites_members_fighter_path(@fighter), :method => :put)
-
   - if(@fighter.user == current_user)
     .action
       = link_to image_tag('icon_small_edit.png'),
@@ -21,6 +19,8 @@
                 members_fighter_path(@fighter),
                 :confirm => 'Are you sure?',
                 :method => :delete
+  .action
+    = favorite_toggle @favorites[@fighter.id], favorites_members_fighter_path(@fighter)
       
 
 %p
@@ -29,8 +29,7 @@
 %br  
 
 %div.img_container
-  = #image_tag(@fighter.photo.url(:normal))
-  = image_tag("placeholder.jpg");
+  = image_tag(@fighter.photo.url(:normal))
 %p
   %b Name:
   = h @fighter.name

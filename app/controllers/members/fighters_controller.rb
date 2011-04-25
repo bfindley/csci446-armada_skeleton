@@ -1,7 +1,7 @@
 class Members::FightersController < Members::MembersController
 
   before_filter :get_users, :only => [:new, :create, :edit, :update]
-  before_filter :get_favorites, :only => [:index, :edit]
+  before_filter :get_favorites, :only => [:index, :edit, :show]
 
   FIGHTERS_PER_PAGE = 10
   

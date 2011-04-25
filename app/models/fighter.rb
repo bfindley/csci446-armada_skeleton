@@ -2,14 +2,19 @@ class Fighter < ActiveRecord::Base
   belongs_to :user
   has_many :favorites
   
-  has_attached_file :photo, :styles => {:normal => "200x200>", :thumb => "60x60>"}
+  has_attached_file :photo,
+                    :styles => {:normal => "200x200>", :thumb => "60x60>"},
+                    :default_url => '/images/default_fighter_:style.png',
+                    :storage => :s3,
+                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                    :path => "cs446/beardos/#{Rails.env}/:attachment/:id/:style.:extension"
   
   validates_presence_of :name
   validates_presence_of :fighter_type
   validates_presence_of :primary_weapon
   validates_presence_of  :cost
   validates_presence_of :description
-  #validates_attachment_presence :photo 
+  validates_attachment_presence :photo 
   
   validates_numericality_of :cost
   
