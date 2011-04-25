@@ -29,11 +29,11 @@ module ApplicationHelper
       return content_tag(:div, html_options) { body }
     end
     
-    more_link = link_to_function("more...", "$('#more').hide(); $('#hidden').show();", :id => 'more')
+    more_link = link_to_function("more...", "$(this).hide(); $('.hidden', this.parentNode).show();")
 
     content_tag(:div, html_options) do 
       body[0..(max-1)] + " " + more_link + 
-        content_tag(:span, body[max..-1], :style => "display:none", :id => "hidden")
+        content_tag(:span, body[max..-1], :style => "display:none", :class => "hidden")
     end
   end
 
