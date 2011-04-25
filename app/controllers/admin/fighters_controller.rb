@@ -3,9 +3,14 @@ class Admin::FightersController < Admin::AdminController
   FIGHTERS_PER_PAGE = 10
   
   before_filter :get_users, :only => [:new, :create, :edit, :update]
+  before_filter :find_fighter, :only => [:edit, :update, :destroy]
   
   def index
-    @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
+    @fighters = Fighter.paginate(
+      :page => params[:page],
+      :include => :user,
+      :order => "created_at DESC",
+      :per_page => FIGHTERS_PER_PAGE)
     @favorites = Favorite.get_favorites_hash(current_user)
     
     respond_to do |format|
@@ -43,12 +48,9 @@ class Admin::FightersController < Admin::AdminController
   end
 
   def edit
-    @fighter = Fighter.find(params[:id])
   end
 
   def update
-    @fighter = Fighter.find(params[:id])
-    
     respond_to do |format|
       if @fighter.update_attributes(params[:fighter])
         flash[:success] = "#{@fighter.name} was successfully updated."
@@ -62,7 +64,6 @@ class Admin::FightersController < Admin::AdminController
   end
 
   def destroy
-    @fighter = Fighter.find(params[:id])
     @fighter.destroy
 
     respond_to do |format|
@@ -91,5 +92,9 @@ class Admin::FightersController < Admin::AdminController
     
     def get_users
       @users = User.all
+    end
+    
+    def find_fighter
+      @fighter = Fighter.find(params[:id])
     end
 end

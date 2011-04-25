@@ -7,7 +7,11 @@ class Members::FightersController < Members::MembersController
   FIGHTERS_PER_PAGE = 10
   
   def index
-    @fighters = Fighter.paginate(:page => params[:page], :include => :user, :per_page => FIGHTERS_PER_PAGE)
+    @fighters = Fighter.paginate(
+      :page => params[:page],
+      :include => :user,
+      :order => "created_at DESC",
+      :per_page => FIGHTERS_PER_PAGE)
     
     respond_to do |format|
       format.html 
@@ -106,9 +110,11 @@ class Members::FightersController < Members::MembersController
   end
   
   def my_favorite_fighters
-    @fighters = Fighter.paginate(:page => params[:page],
+    @fighters = Fighter.paginate(
+      :page => params[:page],
       :joins => "LEFT JOIN favorites on fighters.id = favorites.fighter_id",
       :conditions => ["favorites.user_id = ?",current_user.id],
+      :order => "created_at DESC",
       :per_page => FIGHTERS_PER_PAGE)
     @favorites = Favorite.get_favorites_hash(current_user)
 
@@ -122,6 +128,7 @@ class Members::FightersController < Members::MembersController
     @fighters = Fighter.paginate(:page => params[:page],
       :include => :user,
       :conditions => {:user_id => current_user.id},
+      :order => "created_at DESC",
       :per_page => FIGHTERS_PER_PAGE)
     @favorites = Favorite.get_favorites_hash(current_user)
 
