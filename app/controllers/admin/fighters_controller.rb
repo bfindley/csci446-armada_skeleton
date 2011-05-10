@@ -10,7 +10,7 @@ class Admin::FightersController < Admin::AdminController
     
     respond_to do |format|
       format.html 
-      format.xml  { render :xml => @fighters }
+      format.xml  { render :xml => Fighter.all }
     end
   end
 

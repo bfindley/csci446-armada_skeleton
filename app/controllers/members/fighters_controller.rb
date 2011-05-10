@@ -10,7 +10,7 @@ class Members::FightersController < Members::MembersController
     
     respond_to do |format|
       format.html 
-      format.xml  { render :xml => @fighters }
+      format.xml  { render :xml => Fighter.all }
     end
   end
 
